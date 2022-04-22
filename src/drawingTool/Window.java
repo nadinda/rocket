@@ -1,5 +1,7 @@
 package drawingTool;
 
+import java.awt.Color;
+
 public class Window {
 	private int locationX;
 	private int locationY;
@@ -14,6 +16,7 @@ public class Window {
 	}
 	
 	public void draw() {
-		Drawing.pen().drawOval((locationX + 10), (locationY + 10), 30, 30);
+		Drawing.pen().setColor(Color.cyan);
+		Drawing.pen().fillOval((locationX + (width/3)), (locationY + (width/3)), (width/3), (height/4));
 	}
 }

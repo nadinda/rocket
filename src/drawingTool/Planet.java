@@ -1,5 +1,7 @@
 package drawingTool;
 
+import java.awt.Color;
+
 public class Planet {
 	private int locationX;
 	private int locationY;
@@ -14,6 +16,7 @@ public class Planet {
 	}
 	
 	public void draw() {
-		Drawing.pen().drawOval(locationX, locationY, width, height);
+		Drawing.pen().setColor(Color.orange);
+		Drawing.pen().fillOval(locationX, locationY, width, height);
 	}
 }

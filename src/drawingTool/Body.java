@@ -1,5 +1,7 @@
 package drawingTool;
 
+import java.awt.Color;
+
 public class Body {
 	private int locationX;
 	private int locationY;
@@ -22,7 +24,8 @@ public class Body {
 	}
 	
 	public void draw() {
-		Drawing.pen().drawRect(locationX, locationY, width, height);
+		Drawing.pen().setColor(Color.blue);
+		Drawing.pen().fillRect(locationX, locationY, width, height);
 		window.draw();
 		leftFin.draw();
 		rightFin.draw();

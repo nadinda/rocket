@@ -1,5 +1,7 @@
 package drawingTool;
 
+import java.awt.Color;
+
 public class LeftFin {
 	private int locationX;
 	private int locationY;
@@ -14,7 +16,9 @@ public class LeftFin {
 	}
 	
 	public void draw() {
-		Drawing.pen().drawLine(700, 200, 650, 220);
-		Drawing.pen().drawLine(700, 150, 650, 220);
+		Drawing.pen().setColor(Color.gray);
+		Drawing.pen().fillPolygon(new int[] {(locationX - height / 3), locationX, locationX}, new int[] {(locationY + height + height / 5), (locationY + height / 2), (locationY + height)}, 3);
+		//Drawing.pen().drawLine(locationX, (locationY + height), (locationX - height / 3), (locationY + height + height / 5));
+		//Drawing.pen().drawLine(locationX, (locationY + height / 2), (locationX - height / 3), (locationY + height + height / 5 ));
 	}
 }

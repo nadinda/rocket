@@ -1,5 +1,7 @@
 package drawingTool;
 
+import java.awt.Color;
+
 public class RightFin {
 	private int locationX;
 	private int locationY;
@@ -14,7 +16,9 @@ public class RightFin {
 	}
 	
 	public void draw() {
-		Drawing.pen().drawLine(750, 200, 800, 220);
-		Drawing.pen().drawLine(750, 150, 800, 220);
+		Drawing.pen().setColor(Color.gray);
+		Drawing.pen().fillPolygon(new int[] {(locationX + width + height / 3), (locationX + width), (locationX + width)}, new int[] {(locationY + height + height / 5), (locationY + height / 2), (locationY + height)}, 3);
+		//Drawing.pen().drawLine(locationX + width, (locationY + height), (locationX + width + height / 3), (locationY + height + height / 5));
+		//Drawing.pen().drawLine(locationX + width, (locationY + height / 2), (locationX + width + height / 3), (locationY + height + height / 5 ));
 	}
 }

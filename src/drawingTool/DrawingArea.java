@@ -1,25 +1,8 @@
-/**
- * Provides a panel which can be used for drawing.
- * 
- * @author Björn Gottfried
- * @version 1.0
- */
-
 /*
- * Describe your application domain:
-– What is the title of your domain? Space Rocket
-– Which kinds of objects are involved? 
-	Rocket: Head, Body, Nozzle, Fins, Fire, Window
-	Planet: Earth, Mars, Mercury
-– How do they relate?
-– Provide a UML class diagram of your domain (either drawn by a tool
-or by hand; just provide a picture of it).
-
 @startuml
+skinparam classAttributeIconSize 0
 
-Class Scene{
-	
-}
+Class Scene
 
 Class Rocket{
 	-Body body
@@ -89,6 +72,14 @@ Class Window{
 	+draw(): void
 }
 
+Class Planet{
+	-int locationX
+	-int locationY
+	-int width
+	-int height
+	+draw():void
+}
+
 Scene o-- Rocket : >
 Scene o-- Planet : >
 
@@ -99,10 +90,6 @@ Body o-- Window : has >
 Body o-- LeftFin : has >
 Body o-- RightFin : has >
 Nozzle o-- Fire : has >
-
-Planet o-- Earth : > 
-Planet o-- Mars : > 
-Planet o-- Mercury : > 
 
 @enduml
 */
@@ -120,8 +107,11 @@ public class DrawingArea extends JPanel {
 		super.paintComponent(pen);
 		Drawing.set(pen);
 
-		Rocket rocket = new Rocket(700, 100, 50, 100, 20);
+		Rocket rocket = new Rocket(700, 100, 50, 100);
 		rocket.draw();
+		
+		Rocket rocket2 = new Rocket(200, 400, 150, 200);
+		rocket2.draw();
 		
 		Planet planet = new Planet(500, 700, 200, 200);
 		planet.draw();
