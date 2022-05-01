@@ -7,10 +7,10 @@ public class Body {
 	private int locationY;
 	private int width;
 	private int height;
-	private Window window;
-	private LeftFin leftFin;
-	private RightFin rightFin;
-	private Nozzle nozzle;
+	private Window window; // composite
+	private LeftFin leftFin; // composite
+	private RightFin rightFin; // composite
+	private Nozzle nozzle; // composite
 	
 	public Body(int locationX, int locationY, int width, int height) {
 		this.locationX = locationX;

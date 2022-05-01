@@ -9,7 +9,7 @@ public class Nozzle {
 	private int height;
 	private int heightNozzle;
 	private int widthNozzle;
-	private Fire fire;
+	private Fire fire; // aggregate
 	
 	public Nozzle(int locationX, int locationY, int width, int height) {
 		this.locationX = locationX;

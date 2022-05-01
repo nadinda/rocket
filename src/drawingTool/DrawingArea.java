@@ -7,7 +7,7 @@ Class Scene
 Class Rocket{
 	-Body body
 	-Head head 
-	+Rocket(int locationX, int locationY, int width, int height, int headHeight)
+	+Rocket(int locationX, int locationY, int width, int height)
 	+draw(): void
 }
 Class Head{
@@ -77,6 +77,8 @@ Class Planet{
 	-int locationY
 	-int width
 	-int height
+	+Shape(int locationX, int locationY, int width, int height)
+	+Pattern
 	+draw():void
 }
 
@@ -89,16 +91,17 @@ Body o-- Nozzle : has >
 Body o-- Window : has >
 Body o-- LeftFin : has >
 Body o-- RightFin : has >
-Nozzle o-- Fire : has >
+Nozzle *-- Fire : has >
 
 @enduml
 */
 
 package drawingTool;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
+
+import drawingTool.Scene;
 
 public class DrawingArea extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -106,14 +109,8 @@ public class DrawingArea extends JPanel {
 	protected void paintComponent(Graphics pen) {
 		super.paintComponent(pen);
 		Drawing.set(pen);
-
-		Rocket rocket = new Rocket(700, 100, 50, 100);
-		rocket.draw();
 		
-		Rocket rocket2 = new Rocket(200, 400, 150, 200);
-		rocket2.draw();
-		
-		Planet planet = new Planet(500, 700, 200, 200);
-		planet.draw();
+		Scene scene = new Scene();
+		scene.draw();
 	}
 }
