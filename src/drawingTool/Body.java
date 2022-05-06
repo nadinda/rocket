@@ -3,8 +3,6 @@ package drawingTool;
 import java.awt.Color;
 
 public class Body {
-	private int locationX;
-	private int locationY;
 	private int width;
 	private int height;
 	private Window window; // composite
@@ -12,24 +10,22 @@ public class Body {
 	private RightFin rightFin; // composite
 	private Nozzle nozzle; // composite
 	
-	public Body(int locationX, int locationY, int width, int height) {
-		this.locationX = locationX;
-		this.locationY = locationY;
+	public Body(int width, int height) {
 		this.width = width;
 		this.height = height;
-		window = new Window(locationX, locationY, width, height);
-		leftFin = new LeftFin(locationX, locationY, width, height);
-		rightFin = new RightFin(locationX, locationY, width, height);
-		nozzle = new Nozzle(locationX, locationY, width, height);
+		window = new Window(width/3, height/4);
+		leftFin = new LeftFin(width, height);
+		rightFin = new RightFin(width, height);
+		nozzle = new Nozzle(width, height);
 	}
 	
-	public void draw() {
+	public void drawAt(int left, int bottom) {
 		Drawing.pen().setColor(Color.blue);
-		Drawing.pen().fillRect(locationX, locationY, width, height);
-		window.draw();
-		leftFin.draw();
-		rightFin.draw();
-		nozzle.draw();
+		Drawing.pen().fillRect(left, bottom, width, height);
+		window.drawAt(left + (width/3), bottom + (width/3));
+		leftFin.drawAt(left, bottom);
+		rightFin.drawAt(left, bottom);
+		nozzle.drawAt(left, bottom);
 	}
 	
 }

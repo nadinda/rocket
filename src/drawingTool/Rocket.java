@@ -11,16 +11,16 @@ public class Rocket implements LocatedRectangle {
 	private int height;
 
 	public Rocket(int locationX, int locationY, int width, int height) {
-		body = new Body(locationX, locationY, width, height);
-		head = new Head(locationX, locationY, width, height);
+		body = new Body(width, height);
+		head = new Head(width, height);
 		this.point = new Point(locationX, locationY);
 		this.width = width;
 		this.height = width;
 	}
 
-	public void draw() {
-		body.draw();
-		head.draw();
+	public void drawAt(int left, int bottom) {
+		body.drawAt(left, bottom);
+		head.drawAt(left, bottom);
 	}
 
 	public Point address() {
@@ -33,5 +33,11 @@ public class Rocket implements LocatedRectangle {
 
 	public int height() {
 		return this.height;
+	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
 	}
 }

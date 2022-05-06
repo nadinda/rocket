@@ -2,21 +2,13 @@ package drawingTool;
 
 import java.awt.Color;
 
-public class Window {
-	private int locationX;
-	private int locationY;
-	private int width;
-	private int height;
+public class Window extends RoundObject {
 	
-	public Window(int locationX, int locationY, int width, int height) {
-		this.locationX = locationX;
-		this.locationY = locationY;
-		this.width = width;
-		this.height = height;
+	public Window(int width, int height) {
+		super(width, height);
 	}
 	
-	public void draw() {
-		Drawing.pen().setColor(Color.cyan);
-		Drawing.pen().fillOval((locationX + (width/3)), (locationY + (width/3)), (width/3), (height/4));
+	public void drawAt(int left, int bottom) {
+		super.drawAt(left, bottom, Color.cyan);
 	}
 }

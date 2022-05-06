@@ -2,7 +2,12 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-Class Scene
+Class OuterSpace{
+  -Rocket rocket
+  -AstronomicalObject
+  +OuterSpace(int locationX, int locationY, int width, int height)
+  +draw()
+}
 
 Class Rocket{
 	-Body body
@@ -11,7 +16,7 @@ Class Rocket{
 	+draw(): void
 }
 Class Head{
-    -int locationX
+  -int locationX
 	-int locationY
 	-int width
 	-int height
@@ -72,18 +77,103 @@ Class Window{
 	+draw(): void
 }
 
+
+
+Class AstronomicalObject {
+  -Planet planet
+  -Star star
+  -Asteroid asteroid
+}
+
 Class Planet{
+  -PlanetBody planetBody
+  -PlanetPattern planetPattern
+	+Planet(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+Class PlanetBody{
 	-int locationX
 	-int locationY
 	-int width
 	-int height
-	+Shape(int locationX, int locationY, int width, int height)
-	+Pattern
+	+PlanetBody(int locationX, int locationY, int width, int height)
+	+PlanetPattern(int locationX, int locationY, int width, int height)
 	+draw():void
 }
 
-Scene o-- Rocket : >
-Scene o-- Planet : >
+Class PlanetPattern{
+	-int locationX
+	-int locationY
+	-int width
+	-int height
+	+PlanetPattern(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+Class Star{
+  -StarBody body
+  -StarPattern pattern
+	+Star(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+Class StarBody{
+	-int locationX
+	-int locationY
+	-int width
+	-int height
+	+StarBody(int locationX, int locationY, int width, int height)
+	+StarPattern(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+Class StarPattern{
+	-int locationX
+	-int locationY
+	-int width
+	-int height
+	+StarPattern(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+Class Asteroid{
+  -AsteroidBody starBody
+  -AsteroidPattern pattern
+	+Asteroid(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+Class AsteroidBody{
+	-int locationX
+	-int locationY
+	-int width
+	-int height
+	+AsteroidBody(int locationX, int locationY, int width, int height)
+	+AsteroidPattern(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+Class AsteroidPattern{
+	-int locationX
+	-int locationY
+	-int width
+	-int height
+	+AsteroidPattern(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+OuterSpace *-- Rocket : >
+OuterSpace o-- AstronomicalObject : >
+AstronomicalObject o-- Planet : >
+Planet o-- PlanetBody : >
+PlanetBody o-- PlanetPattern : >
+AstronomicalObject o-- Star : >
+Star o-- StarBody : >
+StarBody o-- StarPattern : >
+AstronomicalObject o-- Asteroid : >
+Asteroid o-- AsteroidBody : >
+AsteroidBody o-- AsteroidPattern : >
 
 Rocket o-- Head : has > 
 Rocket o-- Body : has > 
