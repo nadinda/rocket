@@ -19,8 +19,8 @@ public class Rocket implements LocatedRectangle {
 	}
 
 	public void drawAt(int left, int bottom) {
-		body.drawAt(left, bottom);
-		head.drawAt(left, bottom);
+		body.drawAt(this.point);
+		head.drawAt(this.point);
 	}
 
 	public Point address() {
@@ -37,7 +37,7 @@ public class Rocket implements LocatedRectangle {
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
-		
+		body.drawAt(this.point);
+		head.drawAt(this.point);
 	}
 }

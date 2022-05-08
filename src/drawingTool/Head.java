@@ -1,6 +1,7 @@
 package drawingTool;
 
 import java.awt.Color;
+import java.awt.Point;
 
 public class Head {
 	private int width;
@@ -11,9 +12,9 @@ public class Head {
 		this.height = height;
 	}
 	
-	public void drawAt(int left, int bottom) {
+	public void drawAt(Point point) {
 		Drawing.pen().setColor(Color.gray);
-		Drawing.pen().fillPolygon(new int[] { left, left + (width / 2), left + width },
-				new int[] { bottom, (bottom - height / 3), bottom }, 3);
+		Drawing.pen().fillPolygon(new int[] { point.x, point.x + (width / 2), point.x + width },
+				new int[] { point.y, (point.y - height / 3), point.y }, 3);
 	}
 }

@@ -1,108 +1,131 @@
 /*
 @startuml
 skinparam classAttributeIconSize 0
+skinparam groupInheritance 1
 
-Class OuterSpace{
-  -Rocket rocket
-  -AstronomicalObject
-  +OuterSpace(int locationX, int locationY, int width, int height)
-  +draw()
+Class Scene {
+	-Rocket rocket
+  	-AstronomicalObject
+  	+OuterSpace(int locationX, int locationY, int width, int height)
+  	+draw()
 }
 
-Class Rocket{
+class RoundObject {
+	#width: int
+	#height: int
+	+RoundObject(width: int, height: int)
+	+drawAt(left: int, bottom: int, color: Color): void
+}
+
+Interface LocatedRectangle {
+	+address(): Point
+	+width(): int
+	+height(): int 
+	+draw(): void
+	+intersects(other: LocatedRectangle): boolean 
+	+intersects(other: LocatedRectangle, margin: int): boolean
+	-doesNotIntersect(other: LocatedRectangle, margin: int): boolean
+	+leftOf(other: LocatedRectangle, margin: int): boolean 
+	+rightOf(other: LocatedRectangle, margin: int): boolean
+	-above(other: LocatedRectangle, margin: int): boolean
+	-below(other: LocatedRectangle, margin: int): boolean
+}    
+
+Class Rocket implements LocatedRectangle {
 	-Body body
 	-Head head 
 	+Rocket(int locationX, int locationY, int width, int height)
-	+draw(): void
+	+drawAt(int left, int bottom): void
+	+Point address()
+	+int width()
+	+int height()
 }
 Class Head{
-  -int locationX
-	-int locationY
 	-int width
 	-int height
-	+Head(int locationX, int locationY, int width, int height)
-	+draw():void
+	+Head(int width, int height)
+	+drawAt(int left, int bottom): void
 }
 Class Body{
-	-int locationX
-	-int locationY
 	-int width
 	-int height
-	+Body(int locationX,  int locationY, int width, int height)
-	+draw(): void
+	+Body(int width, int height)
+	+drawAt(int left, int bottom): void
 }
 Class Nozzle{
-	-int locationX
-	-int locationY
 	-int width
 	-int height
 	-int heightNozzle
 	-int widthNozzle
 	-Fire fire
-	+Nozzle(int locationX, int locationY, int width, int height)
-	+draw(): void
+	+Nozzle(int width, int height)
+	+drawAt(int left, int bottom): void
 }
 Class LeftFin{
-	-int locationX
-	-int locationY
 	-int width
 	-int height
-	+LeftFin(int locationX, int locationY, int width, int height)
-	+draw(): void
+	+LeftFin(int width, int height)
+	+drawAt(int left, int bottom): void
 }
 Class RightFin{
-	-int locationX
-	-int locationY
 	-int width
 	-int height
-	+RightFin(int locationX, int locationY, int width, int height)
-	+draw(): void
+	+RightFin(int width, int height)
+	+drawAt(int left, int bottom): void
 }
 Class Fire{
-	-int locationX
-	-int locationY
 	-int width
 	-int height
 	-int heightNozzle
 	-int widthNozzle
-	+Fire(int locationX, int locationY, int width, int height, int widthNozzle, int heightNozzle)
-	+draw(): void
+	+Fire(int widthNozzle, int heightNozzle)
+	+drawAt(int left, int bottom): void
 }
-Class Window{
-	-int locationX
-	-int locationY
+Class Window extends RoundObject{
 	-int width
 	-int height
-	+Window(int locationX, int locationY, int width, int height)
-	+draw(): void
+	+Window(int width, int height)
+	+drawAt(int left, int bottom): void
 }
 
-
-
-Class AstronomicalObject {
+Class AstronomicalObject implements LocatedRectangle {
   -Planet planet
   -Star star
-  -Asteroid asteroid
 }
 
-Class Planet{
+Class Planet extends RoundObject {
   -PlanetBody planetBody
   -PlanetPattern planetPattern
 	+Planet(int locationX, int locationY, int width, int height)
-	+draw():void
+	+drawAt(int left, int bottom): void
 }
 
-Class PlanetBody{
+Class PlanetPattern{
 	-int locationX
 	-int locationY
 	-int width
 	-int height
-	+PlanetBody(int locationX, int locationY, int width, int height)
 	+PlanetPattern(int locationX, int locationY, int width, int height)
 	+draw():void
 }
 
-Class PlanetPattern{
+Class PlanetRing{
+	-int locationX
+	-int locationY
+	-int width
+	-int height
+	+PlanetRing(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+Class Moon extends RoundObject {
+  	-MoonBody planetBody
+  	-MoonPattern planetPattern
+	+Moon(int locationX, int locationY, int width, int height)
+	+draw():void
+}
+
+Class MoonPattern{
 	-int locationX
 	-int locationY
 	-int width
@@ -118,70 +141,21 @@ Class Star{
 	+draw():void
 }
 
-Class StarBody{
-	-int locationX
-	-int locationY
-	-int width
-	-int height
-	+StarBody(int locationX, int locationY, int width, int height)
-	+StarPattern(int locationX, int locationY, int width, int height)
-	+draw():void
-}
+Scene o-- Rocket : has >
+Scene o-- AstronomicalObject : has >
+AstronomicalObject *-- Planet : part of <
+Planet *-- PlanetPattern : part of < 
+Planet *-- PlanetRing : part of < 
+Moon *-- MoonPattern : part of < 
+AstronomicalObject *-- Star : part of <
 
-Class StarPattern{
-	-int locationX
-	-int locationY
-	-int width
-	-int height
-	+StarPattern(int locationX, int locationY, int width, int height)
-	+draw():void
-}
-
-Class Asteroid{
-  -AsteroidBody starBody
-  -AsteroidPattern pattern
-	+Asteroid(int locationX, int locationY, int width, int height)
-	+draw():void
-}
-
-Class AsteroidBody{
-	-int locationX
-	-int locationY
-	-int width
-	-int height
-	+AsteroidBody(int locationX, int locationY, int width, int height)
-	+AsteroidPattern(int locationX, int locationY, int width, int height)
-	+draw():void
-}
-
-Class AsteroidPattern{
-	-int locationX
-	-int locationY
-	-int width
-	-int height
-	+AsteroidPattern(int locationX, int locationY, int width, int height)
-	+draw():void
-}
-
-OuterSpace *-- Rocket : >
-OuterSpace o-- AstronomicalObject : >
-AstronomicalObject o-- Planet : >
-Planet o-- PlanetBody : >
-PlanetBody o-- PlanetPattern : >
-AstronomicalObject o-- Star : >
-Star o-- StarBody : >
-StarBody o-- StarPattern : >
-AstronomicalObject o-- Asteroid : >
-Asteroid o-- AsteroidBody : >
-AsteroidBody o-- AsteroidPattern : >
-
-Rocket o-- Head : has > 
-Rocket o-- Body : has > 
-Body o-- Nozzle : has >
+Rocket *-- Head : part of < 
+Rocket *-- Body : part of <  
+Body *-- Nozzle : part of < 
 Body o-- Window : has >
-Body o-- LeftFin : has >
-Body o-- RightFin : has >
-Nozzle *-- Fire : has >
+Body *-- LeftFin : part of <
+Body *-- RightFin : part of <
+Nozzle o-- Fire : has >
 
 @enduml
 */

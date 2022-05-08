@@ -1,6 +1,7 @@
 package drawingTool;
 
 import java.awt.Color;
+import java.awt.Point;
 
 public class Body {
 	private int width;
@@ -19,13 +20,13 @@ public class Body {
 		nozzle = new Nozzle(width, height);
 	}
 	
-	public void drawAt(int left, int bottom) {
+	public void drawAt(Point point) {
 		Drawing.pen().setColor(Color.blue);
-		Drawing.pen().fillRect(left, bottom, width, height);
-		window.drawAt(left + (width/3), bottom + (width/3));
-		leftFin.drawAt(left, bottom);
-		rightFin.drawAt(left, bottom);
-		nozzle.drawAt(left, bottom);
+		Drawing.pen().fillRect(point.x, point.y, width, height);
+		window.drawAt(point.x + (width/3), point.y + (width/3));
+		leftFin.drawAt(point.x, point.y);
+		rightFin.drawAt(point.x, point.y);
+		nozzle.drawAt(point.x, point.y);
 	}
 	
 }

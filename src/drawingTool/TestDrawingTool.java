@@ -8,6 +8,7 @@
 
 package drawingTool;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -19,6 +20,8 @@ public class TestDrawingTool {
 	public TestDrawingTool(String title) {
 		applicationFrame = new JFrame(title);
 		Dimension screenSize = applicationFrame.getToolkit().getScreenSize();
+		System.out.println(screenSize.width);
+		System.out.println(screenSize.height);
 		applicationFrame.setBounds(0, 0, screenSize.width, screenSize.height);
 		applicationFrame.setVisible(true);
 	}
@@ -26,7 +29,7 @@ public class TestDrawingTool {
 	public void addACanvas(JPanel p) {
 		applicationFrame.add(p);
 	}
-	
+
 	public static void main(String[] args) {
 		TestDrawingTool anApplication = new TestDrawingTool("A drawing tool");
 		anApplication.addACanvas(new DrawingArea());

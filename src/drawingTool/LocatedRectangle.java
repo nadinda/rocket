@@ -6,7 +6,6 @@
  */
 
 package drawingTool;
-
 import java.awt.Point;
 
 public interface LocatedRectangle {
