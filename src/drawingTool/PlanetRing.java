@@ -17,10 +17,8 @@ public class PlanetRing {
 	}
 	
 	public void draw() {
-		Drawing.pen().setColor(Color.black);
-		Drawing.pen().setStroke(new BasicStroke(30));
-		Drawing.pen().drawOval(locationX, locationY, 2*width, height/4);
-	    //Drawing.pen().setColor(Color.blue);
-		//Drawing.pen().fillOval(locationX + 500, locationY - 200, width, height);
+		Drawing.pen().setColor(Color.gray);
+		Drawing.pen().setStroke(new BasicStroke(width/10));
+		Drawing.pen().drawOval(locationX-width/2, locationY+height/2, 2*width, height/4);
 	}
 }

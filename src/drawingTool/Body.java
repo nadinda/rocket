@@ -23,7 +23,7 @@ public class Body {
 	public void drawAt(Point point) {
 		Drawing.pen().setColor(Color.blue);
 		Drawing.pen().fillRect(point.x, point.y, width, height);
-		window.drawAt(point.x + (width/3), point.y + (width/3));
+		window.drawAt(point.x + (width/3), point.y + (width/5));
 		leftFin.drawAt(point.x, point.y);
 		rightFin.drawAt(point.x, point.y);
 		nozzle.drawAt(point.x, point.y);

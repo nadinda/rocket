@@ -5,12 +5,12 @@ import java.awt.Color;
 import java.awt.Point;
 
 public class Planet implements LocatedRectangle {
-	Point point;
+	private Point point;
 	private int width;
 	private int height;
 	private int hasRing;
-	PlanetPattern planetPattern;
-	PlanetRing planetRing;
+	private PlanetPattern planetPattern; // composite
+	private PlanetRing planetRing; // aggregate
 	
 	
 	public Planet(int locationX, int locationY, int width, int height, int hasRing) {
@@ -18,7 +18,7 @@ public class Planet implements LocatedRectangle {
 		this.width = width;
 		this.height = height;
 		this.hasRing = hasRing;
-		planetPattern = new PlanetPattern(locationX, locationY, width, height);
+		planetPattern = new PlanetPattern(width, height);
 		planetRing = new PlanetRing(locationX, locationY, width, height);
 	}
 
@@ -33,18 +33,21 @@ public class Planet implements LocatedRectangle {
 	public int height() {
 		return this.height;
 	}
-
+	
+	private void drawOval(Color c, int x, int y, int width, int height) {
+		Drawing.pen().setColor(c);
+		Drawing.pen().fillOval(x, y, width, height);
+	}
+	
 	@Override
 	public void draw() {
 		if (hasRing == 1) {
 			planetRing.draw();
-			Drawing.pen().setColor(Color.orange);
-			Drawing.pen().fillOval(this.point.x, this.point.y, width, height);
-			planetPattern.draw();
+			drawOval(Color.orange, this.point.x, this.point.y, width, height);
+			planetPattern.drawAt(this.point.x, this.point.y);
 		} else {
-			Drawing.pen().setColor(Color.orange);
-			Drawing.pen().fillOval(this.point.x, this.point.y, width, height);
-			planetPattern.draw();
+			drawOval(Color.orange, this.point.x, this.point.y, width, height);
+			planetPattern.drawAt(this.point.x, this.point.y);
 		}
 	}
 }

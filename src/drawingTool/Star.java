@@ -18,39 +18,33 @@ public class Star implements LocatedRectangle {
 	}
 	
 	// reference: https://stackoverflow.com/a/39808564
-	private static Shape createStar(double centerX, double centerY, double innerRadius, double outerRadius, int numRays, double startAngleRad)
-	    {
-	        Path2D path = new Path2D.Double();
-	        double deltaAngleRad = Math.PI / numRays;
-	        for (int i = 0; i < numRays * 2; i++)
-	        {
-	            double angleRad = startAngleRad + i * deltaAngleRad;
-	            double ca = Math.cos(angleRad);
-	            double sa = Math.sin(angleRad);
-	            double relX = ca;
-	            double relY = sa;
-	            if ((i & 1) == 0)
-	            {
-	                relX *= outerRadius;
-	                relY *= outerRadius;
-	            }
-	            else
-	            {
-	                relX *= innerRadius;
-	                relY *= innerRadius;
-	            }
-	            if (i == 0)
-	            {
-	                path.moveTo(centerX + relX, centerY + relY);
-	            }
-	            else
-	            {
-	                path.lineTo(centerX + relX, centerY + relY);
-	            }
+	private static Shape createStar(double centerX, double centerY, double innerRadius, double outerRadius, int numRays, double startAngleRad) {
+        Path2D path = new Path2D.Double();
+        double deltaAngleRad = Math.PI / numRays;
+        for (int i = 0; i < numRays * 2; i++) {
+	        double angleRad = startAngleRad + i * deltaAngleRad;
+	        double ca = Math.cos(angleRad);
+	        double sa = Math.sin(angleRad);
+	        double relX = ca;
+	        double relY = sa;
+	        if ((i & 1) == 0) {
+	            relX *= outerRadius;
+	            relY *= outerRadius;
 	        }
-	        path.closePath();
-	        return path;
-	    }
+	        else {
+	            relX *= innerRadius;
+	            relY *= innerRadius;
+	        }
+	        if (i == 0) {
+	            path.moveTo(centerX + relX, centerY + relY);
+	        }
+	        else {
+	        	path.lineTo(centerX + relX, centerY + relY);
+	        }
+        }
+        path.closePath();
+        return path;
+    }
 
 	public Point address() {
 		return this.point;
@@ -63,12 +57,9 @@ public class Star implements LocatedRectangle {
 	public int height() {
 		return this.height;
 	}
-	
 
 	@Override
 	public void draw() {
-		Drawing.pen().setColor(Color.red);
-		Drawing.pen().fillPolygon(new int[]{ 55, 67, 109, 73, 83, 55, 27, 37, 1, 43 }, new int[]{ 0, 36, 36, 54, 96, 72, 96, 54, 36, 36 }, 10);
 		Drawing.pen().setPaint(new RadialGradientPaint(
 	            new Point(this.point.x, this.point.y), width, new float[] { 0, 0.3f, 1 }, 
 	            new Color[] { Color.RED, Color.YELLOW, Color.ORANGE }));

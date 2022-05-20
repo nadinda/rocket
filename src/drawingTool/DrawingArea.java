@@ -4,53 +4,68 @@ skinparam classAttributeIconSize 0
 skinparam groupInheritance 1
 
 Class Scene {
-	-Rocket rocket
-  	-AstronomicalObject
-  	+OuterSpace(int locationX, int locationY, int width, int height)
-  	+draw()
+  	-ArrayList<LocatedRectangle> objects
+  	+Scene()
+  	+addRockets(): void
+  	+addPlanets(): void
+  	+addStars(): void
+  	-addAnObject(LocatedRectangle newObj): void
+  	-anySpaceLeft(LocatedRectangle other): boolean
+  	+drawBackground(Dimension dimension): void
+  	+draw(Dimension dimension): void 
 }
 
+
 class RoundObject {
-	#width: int
-	#height: int
-	+RoundObject(width: int, height: int)
-	+drawAt(left: int, bottom: int, color: Color): void
+	-int width
+	-int height
+	+RoundObject(int width, int height)
+	+drawAt(int left, int bottom, Color color): void
+        +getWidth(): int
+	+getHeight(): int
 }
 
 Interface LocatedRectangle {
-	+address(): Point
-	+width(): int
-	+height(): int 
+	+Point address()
+	+int width()
+	+int height()
 	+draw(): void
-	+intersects(other: LocatedRectangle): boolean 
-	+intersects(other: LocatedRectangle, margin: int): boolean
-	-doesNotIntersect(other: LocatedRectangle, margin: int): boolean
-	+leftOf(other: LocatedRectangle, margin: int): boolean 
-	+rightOf(other: LocatedRectangle, margin: int): boolean
-	-above(other: LocatedRectangle, margin: int): boolean
-	-below(other: LocatedRectangle, margin: int): boolean
+	+intersects(LocatedRectangle other): boolean 
+	+intersects(LocatedRectangle other, int margin): boolean
+	-doesNotIntersect(LocatedRectangle other, int margin): boolean
+	+leftOf(LocatedRectangle other, int margin): boolean 
+	+rightOf(LocatedRectangle other, int margin): boolean
+	-above(LocatedRectangle other, int margin): boolean
+	-below(LocatedRectangle other, int margin): boolean
 }    
 
 Class Rocket implements LocatedRectangle {
 	-Body body
 	-Head head 
+	-Point point
+	-int width
+	-int height
 	+Rocket(int locationX, int locationY, int width, int height)
-	+drawAt(int left, int bottom): void
-	+Point address()
-	+int width()
-	+int height()
+	+draw(): void
+	+address():Point 
+	+width():int
+	+height():int
 }
 Class Head{
 	-int width
 	-int height
 	+Head(int width, int height)
-	+drawAt(int left, int bottom): void
+	+drawAt(Point point): void
 }
 Class Body{
 	-int width
 	-int height
+	-Window window
+	-LeftFin leftFin
+	-RightFin rightFin
+	-Nozzle nozzle
 	+Body(int width, int height)
-	+drawAt(int left, int bottom): void
+	+drawAt(Point point): void
 }
 Class Nozzle{
 	-int width
@@ -82,31 +97,28 @@ Class Fire{
 	+drawAt(int left, int bottom): void
 }
 Class Window extends RoundObject{
-	-int width
-	-int height
 	+Window(int width, int height)
 	+drawAt(int left, int bottom): void
 }
 
-Class AstronomicalObject implements LocatedRectangle {
-  -Planet planet
-  -Star star
-}
-
-Class Planet extends RoundObject {
-  -PlanetBody planetBody
-  -PlanetPattern planetPattern
-	+Planet(int locationX, int locationY, int width, int height)
-	+drawAt(int left, int bottom): void
-}
-
-Class PlanetPattern{
-	-int locationX
-	-int locationY
+Class Planet implements LocatedRectangle {
+  	-Point point
 	-int width
 	-int height
-	+PlanetPattern(int locationX, int locationY, int width, int height)
-	+draw():void
+	-int hasRing
+	-PlanetPattern planetPattern
+	-PlanetRing planetRing
+	+Planet(int locationX, int locationY, int width, int height, int hasRing)
+    +address(): Point 
+	+width(): int
+	+height(): int
+	+draw(): void
+        -drawOval(c: Color, x: int, y: int, width: int, height: int): void
+}
+Class PlanetPattern extends RoundObject{
+	+PlanetPattern (int width, int height)
+	+drawAt(locationX: int, locationY: int): void
+        -drawOval(c: Color, x: int, y: int, width: int, height: int): void
 }
 
 Class PlanetRing{
@@ -115,40 +127,27 @@ Class PlanetRing{
 	-int width
 	-int height
 	+PlanetRing(int locationX, int locationY, int width, int height)
-	+draw():void
+	+draw(): void
 }
 
-Class Moon extends RoundObject {
-  	-MoonBody planetBody
-  	-MoonPattern planetPattern
-	+Moon(int locationX, int locationY, int width, int height)
-	+draw():void
-}
-
-Class MoonPattern{
-	-int locationX
-	-int locationY
+Class Star implements LocatedRectangle{
+	-Point point
 	-int width
 	-int height
-	+PlanetPattern(int locationX, int locationY, int width, int height)
-	+draw():void
-}
-
-Class Star{
-  -StarBody body
-  -StarPattern pattern
 	+Star(int locationX, int locationY, int width, int height)
-	+draw():void
+	-createStar(centerX: double, centerY: double, innerRadius: double, outerRadius: double, 
+				numRays: int, startAngleRad: double): Shape
+	+address():Point 
+	+width():int
+	+height():int
+	+draw(): void
 }
 
 Scene o-- Rocket : has >
-Scene o-- AstronomicalObject : has >
-AstronomicalObject *-- Planet : part of <
+Scene o-- Planet : has >
+Scene o-- Star : has >
 Planet *-- PlanetPattern : part of < 
-Planet *-- PlanetRing : part of < 
-Moon *-- MoonPattern : part of < 
-AstronomicalObject *-- Star : part of <
-
+Planet o-- PlanetRing : has >
 Rocket *-- Head : part of < 
 Rocket *-- Body : part of <  
 Body *-- Nozzle : part of < 
@@ -156,12 +155,12 @@ Body o-- Window : has >
 Body *-- LeftFin : part of <
 Body *-- RightFin : part of <
 Nozzle o-- Fire : has >
-
 @enduml
 */
 
 package drawingTool;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
@@ -169,12 +168,18 @@ import drawingTool.Scene;
 
 public class DrawingArea extends JPanel {
 	private static final long serialVersionUID = 1L;
-
+	private Dimension dimension;
+	
+	public DrawingArea(Dimension dimension) {
+		super();
+		this.dimension = dimension;
+	}
+	
 	protected void paintComponent(Graphics pen) {
 		super.paintComponent(pen);
 		Drawing.set(pen);
 		
 		Scene scene = new Scene();
-		scene.draw();
+		scene.draw(this.dimension);
 	}
 }

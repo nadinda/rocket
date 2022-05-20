@@ -3,8 +3,8 @@ package drawingTool;
 import java.awt.Point;
 
 public class Rocket implements LocatedRectangle {
-	private Body body;
-	private Head head;
+	private Body body; // composite
+	private Head head; // composite
 	
 	private Point point;
 	private int width;
@@ -16,11 +16,6 @@ public class Rocket implements LocatedRectangle {
 		this.point = new Point(locationX, locationY);
 		this.width = width;
 		this.height = width;
-	}
-
-	public void drawAt(int left, int bottom) {
-		body.drawAt(this.point);
-		head.drawAt(this.point);
 	}
 
 	public Point address() {
