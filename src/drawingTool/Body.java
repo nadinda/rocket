@@ -6,6 +6,7 @@ import java.awt.Point;
 public class Body {
 	private int width;
 	private int height;
+	private Color bodyColor;
 	private Window window; // composite
 	private LeftFin leftFin; // composite
 	private RightFin rightFin; // composite
@@ -14,6 +15,7 @@ public class Body {
 	public Body(int width, int height) {
 		this.width = width;
 		this.height = height;
+		this.bodyColor = new Color(RandomNumber.between(0, 140), RandomNumber.between(0, 116), RandomNumber.between(255, 255));
 		window = new Window(width/3, height/4);
 		leftFin = new LeftFin(width, height);
 		rightFin = new RightFin(width, height);
@@ -21,7 +23,7 @@ public class Body {
 	}
 	
 	public void drawAt(Point point) {
-		Drawing.pen().setColor(Color.blue);
+		Drawing.pen().setColor(bodyColor);
 		Drawing.pen().fillRect(point.x, point.y, width, height);
 		window.drawAt(point.x + (width/3), point.y + (width/5));
 		leftFin.drawAt(point.x, point.y);

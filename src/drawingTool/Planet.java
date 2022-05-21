@@ -9,6 +9,7 @@ public class Planet implements LocatedRectangle {
 	private int width;
 	private int height;
 	private int hasRing;
+	private Color planetColor;
 	private PlanetPattern planetPattern; // composite
 	private PlanetRing planetRing; // aggregate
 	
@@ -18,6 +19,7 @@ public class Planet implements LocatedRectangle {
 		this.width = width;
 		this.height = height;
 		this.hasRing = hasRing;
+		this.planetColor = new Color(232, RandomNumber.between(72, 232), 19);
 		planetPattern = new PlanetPattern(width, height);
 		planetRing = new PlanetRing(locationX, locationY, width, height);
 	}
@@ -39,15 +41,21 @@ public class Planet implements LocatedRectangle {
 		Drawing.pen().fillOval(x, y, width, height);
 	}
 	
+	public void setPlanetColor(Color newColor) {
+		this.planetColor = newColor;
+		//System.out.println(this.planetColor);
+	}
+	
 	@Override
 	public void draw() {
 		if (hasRing == 1) {
 			planetRing.draw();
-			drawOval(Color.orange, this.point.x, this.point.y, width, height);
-			planetPattern.drawAt(this.point.x, this.point.y);
+			System.out.println(planetColor);
+			drawOval(planetColor, point.x, point.y, width, height);
+			planetPattern.drawAt(point.x, point.y);
 		} else {
-			drawOval(Color.orange, this.point.x, this.point.y, width, height);
-			planetPattern.drawAt(this.point.x, this.point.y);
+			drawOval(planetColor, point.x, point.y, width, height);
+			planetPattern.drawAt(point.x, point.y);
 		}
 	}
 }

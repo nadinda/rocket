@@ -9,11 +9,19 @@ import drawingTool.TestDrawingTool;
 
 public class Scene  {
 	private ArrayList<LocatedRectangle> objects = new ArrayList<LocatedRectangle>();
+	private ArrayList<Planet> planets = new ArrayList<Planet>();
 	
 	public Scene() {
 		addRockets();
 		addPlanets();
 		addStars();
+	}
+	
+	public void changePlanetColor() {
+		for (Planet planet : planets) {
+			System.out.println("changePlanetColor");
+			planet.setPlanetColor(Color.BLUE);
+		}
 	}
 	
 	public void addRockets() {
@@ -37,6 +45,7 @@ public class Scene  {
 			int locationY = RandomNumber.between(height,720);
 			int hasRing = RandomNumber.between(0,1);
 			Planet nextPlanet = new Planet(locationX, locationY, width, height, hasRing);
+			planets.add(nextPlanet);
 			addAnObject(nextPlanet);
 		}
 	}
@@ -78,5 +87,8 @@ public class Scene  {
 		for (LocatedRectangle eachObj : objects) {
 			eachObj.draw();
 		}
+		/*for (Planet eachPlanet : planets) {
+			eachPlanet.draw();
+		}*/
 	}
 }

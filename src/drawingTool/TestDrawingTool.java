@@ -1,38 +1,66 @@
-/**
+/*
  * Provides a test application window with a panel.
- * 
- * @author Björn Gottfried
- * 
- * @version 1.0
  */
 
 package drawingTool;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-public class TestDrawingTool {
-	private JFrame applicationFrame;
-	
+public class TestDrawingTool extends JFrame implements ActionListener {
+	private DrawingArea drawing;
+	private Buttons buttons = new Buttons();
+
 	public TestDrawingTool(String title) {
-		applicationFrame = new JFrame(title);
-		Dimension screenSize = applicationFrame.getToolkit().getScreenSize();
-		applicationFrame.setBounds(0, 0, screenSize.width, screenSize.height);
-		applicationFrame.setVisible(true);
-	}
-	
-	public void addACanvas(JPanel p) {
-		applicationFrame.add(p);
+		super(title);
+
+		setLayout(new BorderLayout());
+
+		constructButtonMenu();
+		constructDrawingArea();
+
+		Dimension screenSize = getToolkit().getScreenSize();
+		setBounds(0, 0, screenSize.width, screenSize.height);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
 	}
 
-	public Dimension getDimension() {
-		return applicationFrame.getToolkit().getScreenSize();
+	private void constructButtonMenu() {
+		buttons.addButtonsToAPanel(this);
+		buttons.addActionListener(this);
 	}
 	
+	public Dimension getDimension() {
+		return getToolkit().getScreenSize();
+	}
+
+	private void constructDrawingArea() {
+		drawing = new DrawingArea(getDimension());
+		add(drawing, BorderLayout.CENTER);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == buttons.getPlanetsButton()) {
+			tidyUpDrawingArea();
+			drawing.getScene().changePlanetColor();
+		} else if (e.getSource() == buttons.getRocketsButton()) {
+			tidyUpDrawingArea();
+			drawing.getScene();
+		}
+	}
+
+	private void tidyUpDrawingArea() {
+		drawing.removeAll();
+		drawing.revalidate();
+		drawing.repaint();
+	}
+
 	public static void main(String[] args) {
-		TestDrawingTool anApplication = new TestDrawingTool("Space Adventure");
-		anApplication.addACanvas(new DrawingArea(anApplication.getDimension()));
+		new TestDrawingTool("Draw cool Rockets");
 	}
 }

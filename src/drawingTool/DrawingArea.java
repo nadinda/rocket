@@ -169,6 +169,7 @@ import drawingTool.Scene;
 public class DrawingArea extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Dimension dimension;
+	private Scene scene;
 	
 	public DrawingArea(Dimension dimension) {
 		super();
@@ -179,7 +180,11 @@ public class DrawingArea extends JPanel {
 		super.paintComponent(pen);
 		Drawing.set(pen);
 		
-		Scene scene = new Scene();
+		scene = new Scene();
 		scene.draw(this.dimension);
+	}
+	
+	public Scene getScene() {
+		return scene;
 	}
 }
