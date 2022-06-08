@@ -19,7 +19,6 @@ public class Planet implements LocatedRectangle {
 		this.width = width;
 		this.height = height;
 		this.hasRing = hasRing;
-		this.planetColor = new Color(232, RandomNumber.between(72, 232), 19);
 		planetPattern = new PlanetPattern(width, height);
 		planetRing = new PlanetRing(locationX, locationY, width, height);
 	}
@@ -43,14 +42,12 @@ public class Planet implements LocatedRectangle {
 	
 	public void setPlanetColor(Color newColor) {
 		this.planetColor = newColor;
-		//System.out.println(this.planetColor);
 	}
 	
 	@Override
 	public void draw() {
 		if (hasRing == 1) {
 			planetRing.draw();
-			System.out.println(planetColor);
 			drawOval(planetColor, point.x, point.y, width, height);
 			planetPattern.drawAt(point.x, point.y);
 		} else {

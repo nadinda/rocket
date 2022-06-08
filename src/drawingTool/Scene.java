@@ -3,13 +3,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import drawingTool.RandomNumber;
 import drawingTool.TestDrawingTool;
 
 public class Scene  {
 	private ArrayList<LocatedRectangle> objects = new ArrayList<LocatedRectangle>();
-	private ArrayList<Planet> planets = new ArrayList<Planet>();
 	
 	public Scene() {
 		addRockets();
@@ -18,9 +18,37 @@ public class Scene  {
 	}
 	
 	public void changePlanetColor() {
-		for (Planet planet : planets) {
-			System.out.println("changePlanetColor");
-			planet.setPlanetColor(Color.BLUE);
+		for (LocatedRectangle anObj : objects) {
+			if (anObj.getClass() == Planet.class) {
+				Color newColor = new Color(232, RandomNumber.between(72, 232), 19);
+				((Planet) anObj).setPlanetColor(newColor);
+			}
+		}
+	}
+	
+	public void changeRocketHeadColor() {
+		for (LocatedRectangle anObj : objects) {
+			if (anObj.getClass() == Rocket.class) {
+				Color newColor = new Color(RandomNumber.between(0, 255), RandomNumber.between(154, 255), RandomNumber.between(180, 255));
+				((Rocket) anObj).setHeadColor(newColor);
+			}
+		}
+	}
+	
+	public void changeRocketHeadShape() {
+		for (LocatedRectangle anObj : objects) {
+			if (anObj.getClass() == Rocket.class) {
+				int currentHeadShape = ((Rocket) anObj).getHeadShape();
+				((Rocket) anObj).setHeadShape(currentHeadShape);
+			}
+		}
+	}
+	
+	public void changeRocketFireLevel() {
+		for (LocatedRectangle anObj : objects) {
+			if (anObj.getClass() == Rocket.class) {
+				((Rocket) anObj).setFireLevel(RandomNumber.between(0,3));
+			}
 		}
 	}
 	
@@ -45,7 +73,6 @@ public class Scene  {
 			int locationY = RandomNumber.between(height,720);
 			int hasRing = RandomNumber.between(0,1);
 			Planet nextPlanet = new Planet(locationX, locationY, width, height, hasRing);
-			planets.add(nextPlanet);
 			addAnObject(nextPlanet);
 		}
 	}
@@ -87,8 +114,5 @@ public class Scene  {
 		for (LocatedRectangle eachObj : objects) {
 			eachObj.draw();
 		}
-		/*for (Planet eachPlanet : planets) {
-			eachPlanet.draw();
-		}*/
 	}
 }

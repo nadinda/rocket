@@ -30,5 +30,9 @@ public class Body {
 		rightFin.drawAt(point.x, point.y);
 		nozzle.drawAt(point.x, point.y);
 	}
+
+	public void setFireLevel(int level) {
+		nozzle.setFireLevel(level);		
+	}
 	
 }

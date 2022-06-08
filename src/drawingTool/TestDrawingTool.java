@@ -29,13 +29,13 @@ public class TestDrawingTool extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 
+	public Dimension getDimension() {
+		return getToolkit().getScreenSize();
+	}
+	
 	private void constructButtonMenu() {
 		buttons.addButtonsToAPanel(this);
 		buttons.addActionListener(this);
-	}
-	
-	public Dimension getDimension() {
-		return getToolkit().getScreenSize();
 	}
 
 	private void constructDrawingArea() {
@@ -45,12 +45,18 @@ public class TestDrawingTool extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == buttons.getPlanetsButton()) {
+		if (e.getSource() == buttons.getPlanetsColorButton()) {
 			tidyUpDrawingArea();
 			drawing.getScene().changePlanetColor();
-		} else if (e.getSource() == buttons.getRocketsButton()) {
+		} else if (e.getSource() == buttons.getRocketsHeadColorButton()) {
 			tidyUpDrawingArea();
-			drawing.getScene();
+			drawing.getScene().changeRocketHeadColor();
+		} else if (e.getSource() == buttons.getRocketsHeadShapeButton()) {
+			tidyUpDrawingArea();
+			drawing.getScene().changeRocketHeadShape();
+		} else if (e.getSource() == buttons.getRocketsFireLevelButton()) {
+			tidyUpDrawingArea();
+			drawing.getScene().changeRocketFireLevel();
 		}
 	}
 
@@ -61,6 +67,6 @@ public class TestDrawingTool extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new TestDrawingTool("Draw cool Rockets");
+		new TestDrawingTool("Space Adventure");
 	}
 }

@@ -14,7 +14,6 @@ public class Fire {
 		this.height = height;
 		this.widthNozzle = widthNozzle;
 		this.heightNozzle = heightNozzle;
-		this.fireLevel = RandomNumber.between(0, 3);
 	}
 	
 	public void drawAt(int left, int bottom) {
@@ -46,5 +45,9 @@ public class Fire {
 		Drawing.pen().setColor(Color.yellow);
 		Drawing.pen().fillPolygon(new int[] {left + width/10 + widthNozzle/3, left + width/10 + widthNozzle/2, left + width/10 + (2*widthNozzle)/3}, 
 				new int[] {bottom + height + heightNozzle, bottom + height + (5*heightNozzle)/2 - (8/10 *heightNozzle), bottom + height + heightNozzle}, 3);
+	}
+	
+	public void setFireLevel(int fireLevel){
+		this.fireLevel = fireLevel;
 	}
 }

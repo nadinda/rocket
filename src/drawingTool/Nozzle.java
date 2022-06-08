@@ -22,4 +22,8 @@ public class Nozzle {
 		Drawing.pen().fillRect(left + width / 10, bottom + height, widthNozzle, heightNozzle);
 		fire.drawAt(left, bottom);
 	}
+	
+	public void setFireLevel( int fireLevel){
+		fire.setFireLevel(fireLevel);
+	}
 }

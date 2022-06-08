@@ -3,6 +3,15 @@
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 1
 
+Class Buttons {
+  	-JButton planetsButton
+  	-JButton rocketsButton
+  	+addActionListener(ActionListener listener): void
+  	+addButtonsToAPanel(JFrame frame): void
+  	+JButton getPlanetsButton(): planetsButton
+  	+JButton getRocketsButton(): rocketsButton
+}
+
 Class Scene {
   	-ArrayList<LocatedRectangle> objects
   	+Scene()
@@ -14,8 +23,6 @@ Class Scene {
   	+drawBackground(Dimension dimension): void
   	+draw(Dimension dimension): void 
 }
-
-
 class RoundObject {
 	-int width
 	-int height
@@ -24,7 +31,6 @@ class RoundObject {
         +getWidth(): int
 	+getHeight(): int
 }
-
 Interface LocatedRectangle {
 	+Point address()
 	+int width()
@@ -38,7 +44,6 @@ Interface LocatedRectangle {
 	-above(LocatedRectangle other, int margin): boolean
 	-below(LocatedRectangle other, int margin): boolean
 }    
-
 Class Rocket implements LocatedRectangle {
 	-Body body
 	-Head head 
@@ -54,6 +59,8 @@ Class Rocket implements LocatedRectangle {
 Class Head{
 	-int width
 	-int height
+	-Color headColor
+	-int headShape
 	+Head(int width, int height)
 	+drawAt(Point point): void
 }
@@ -64,6 +71,7 @@ Class Body{
 	-LeftFin leftFin
 	-RightFin rightFin
 	-Nozzle nozzle
+	-Color bodyColor
 	+Body(int width, int height)
 	+drawAt(Point point): void
 }
@@ -93,14 +101,17 @@ Class Fire{
 	-int height
 	-int heightNozzle
 	-int widthNozzle
-	+Fire(int widthNozzle, int heightNozzle)
+	-int fireLevel
+	+Fire(int width, int height, int widthNozzle, int heightNozzle)
 	+drawAt(int left, int bottom): void
+	-createRedFire(int left, int bottom): void
+	-createOrangeFire(int left, int bottom): void
+	-createYellowFire(int left, int bottom): void
 }
 Class Window extends RoundObject{
 	+Window(int width, int height)
 	+drawAt(int left, int bottom): void
 }
-
 Class Planet implements LocatedRectangle {
   	-Point point
 	-int width
@@ -108,19 +119,19 @@ Class Planet implements LocatedRectangle {
 	-int hasRing
 	-PlanetPattern planetPattern
 	-PlanetRing planetRing
+	-Color planetColor
 	+Planet(int locationX, int locationY, int width, int height, int hasRing)
     +address(): Point 
 	+width(): int
 	+height(): int
 	+draw(): void
-        -drawOval(c: Color, x: int, y: int, width: int, height: int): void
+    -drawOval(c: Color, x: int, y: int, width: int, height: int): void
 }
 Class PlanetPattern extends RoundObject{
 	+PlanetPattern (int width, int height)
 	+drawAt(locationX: int, locationY: int): void
-        -drawOval(c: Color, x: int, y: int, width: int, height: int): void
+    -drawOval(c: Color, x: int, y: int, width: int, height: int): void
 }
-
 Class PlanetRing{
 	-int locationX
 	-int locationY
@@ -129,7 +140,6 @@ Class PlanetRing{
 	+PlanetRing(int locationX, int locationY, int width, int height)
 	+draw(): void
 }
-
 Class Star implements LocatedRectangle{
 	-Point point
 	-int width
@@ -142,7 +152,6 @@ Class Star implements LocatedRectangle{
 	+height():int
 	+draw(): void
 }
-
 Scene o-- Rocket : has >
 Scene o-- Planet : has >
 Scene o-- Star : has >
@@ -180,11 +189,13 @@ public class DrawingArea extends JPanel {
 		super.paintComponent(pen);
 		Drawing.set(pen);
 		
-		scene = new Scene();
-		scene.draw(this.dimension);
+		if (scene == null) {
+			scene = new Scene();
+		} else
+			scene.draw(this.dimension);
 	}
 	
 	public Scene getScene() {
-		return scene;
+		return this.scene;
 	}
 }

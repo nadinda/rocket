@@ -1,5 +1,6 @@
 package drawingTool;
 
+import java.awt.Color;
 import java.awt.Point;
 
 public class Rocket implements LocatedRectangle {
@@ -34,5 +35,21 @@ public class Rocket implements LocatedRectangle {
 	public void draw() {
 		body.drawAt(this.point);
 		head.drawAt(this.point);
+	}
+
+	public void setHeadColor(Color color) {
+		head.setHeadColor(color);
+	}
+	
+	public void setHeadShape(int currentShape) {
+		head.setHeadShape(currentShape);
+	}
+	
+	public int getHeadShape() {
+		return head.getHeadShape();
+	}
+
+	public void setFireLevel(int level) {
+		body.setFireLevel(level);
 	}
 }
