@@ -5,6 +5,7 @@
 package drawingTool;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +46,11 @@ public class TestDrawingTool extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == buttons.getPlanetsColorButton()) {
+		if (e.getSource() == buttons.getBgColorButton()) {
+			tidyUpDrawingArea();
+			drawing.getScene().setBgColor();
+		}
+		else if (e.getSource() == buttons.getPlanetsColorButton()) {
 			tidyUpDrawingArea();
 			drawing.getScene().changePlanetColor();
 		} else if (e.getSource() == buttons.getRocketsHeadColorButton()) {
@@ -56,7 +61,7 @@ public class TestDrawingTool extends JFrame implements ActionListener {
 			drawing.getScene().changeRocketHeadShape();
 		} else if (e.getSource() == buttons.getRocketsFireLevelButton()) {
 			tidyUpDrawingArea();
-			drawing.getScene().changeRocketFireLevel();
+			drawing.getScene().setFireLevel();
 		}
 	}
 

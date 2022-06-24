@@ -7,14 +7,26 @@ import java.util.Arrays;
 
 import drawingTool.RandomNumber;
 import drawingTool.TestDrawingTool;
+import graphicState.FireState;
+import graphicState.State;
 
 public class Scene  {
 	private ArrayList<LocatedRectangle> objects = new ArrayList<LocatedRectangle>();
 	
+	private static State graphicState;
+	private Color bgColor;
+	
 	public Scene() {
+		graphicState = FireState.getInstance(this);
+		bgColor = Color.black;
+		
 		addRockets();
 		addPlanets();
 		addStars();
+	}
+	
+	public void changeBgColor() {
+		this.bgColor = new Color(232, RandomNumber.between(72, 232), 19);
 	}
 	
 	public void changePlanetColor() {
@@ -105,14 +117,24 @@ public class Scene  {
 	}
 	
 	public void drawBackground(Dimension dimension) {
-		Drawing.pen().setColor(Color.black);
+		//Drawing.pen().setColor(newColor);
+		Drawing.pen().setColor(this.bgColor);
 		Drawing.pen().fillRect(0, 0, dimension.width, dimension.height);
 	}
 	
 	public void draw(Dimension dimension) {
+		//drawBackground(dimension, newColor);
 		drawBackground(dimension);
 		for (LocatedRectangle eachObj : objects) {
 			eachObj.draw();
 		}
+	}
+
+	public void setFireLevel() {
+		graphicState = graphicState.setFireLevel();
+	}
+	
+	public void setBgColor() {
+		graphicState = graphicState.setBgColor();
 	}
 }

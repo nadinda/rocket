@@ -4,12 +4,16 @@ skinparam classAttributeIconSize 0
 skinparam groupInheritance 1
 
 Class Buttons {
-  	-JButton planetsButton
-  	-JButton rocketsButton
+  	-JButton planetsColorButton
+	-JButton rocketsHeadColorButton
+	-JButton rocketsHeadShapeButton
+	-JButton rocketsFireLevelButton
   	+addActionListener(ActionListener listener): void
   	+addButtonsToAPanel(JFrame frame): void
-  	+JButton getPlanetsButton(): planetsButton
-  	+JButton getRocketsButton(): rocketsButton
+  	+JButton getPlanetsColorButton(): planetsColorButton
+  	+JButton getRocketsHeadColorButton(): rocketsHeadColorButton
+        +JButton getRocketsHeadShapeButton(): rocketsHeadShapeButton
+        +JButton getRocketsFireLevelButton(): rocketsFireLevelButton
 }
 
 Class Scene {
@@ -51,19 +55,28 @@ Class Rocket implements LocatedRectangle {
 	-int width
 	-int height
 	+Rocket(int locationX, int locationY, int width, int height)
-	+draw(): void
 	+address():Point 
 	+width():int
 	+height():int
+        +setHeadColor(Color color): void
+	+setHeadShape(int currentShape): void
+	+getHeadShape(): int
+	+setFireLevel(int level): void
+        +draw(): void
 }
+
 Class Head{
 	-int width
 	-int height
 	-Color headColor
 	-int headShape
 	+Head(int width, int height)
-	+drawAt(Point point): void
+        +setHeadColor(Color newColor): void
+	+setHeadShape(int headShape): void
+	+getHeadShape(): int
+	+drawAt(Point point): void    
 }
+
 Class Body{
 	-int width
 	-int height
@@ -73,6 +86,7 @@ Class Body{
 	-Nozzle nozzle
 	-Color bodyColor
 	+Body(int width, int height)
+        +setFireLevel(int level): void
 	+drawAt(Point point): void
 }
 Class Nozzle{
@@ -124,13 +138,15 @@ Class Planet implements LocatedRectangle {
     +address(): Point 
 	+width(): int
 	+height(): int
+        +setPlanetColor(Color newColor): void
 	+draw(): void
-    -drawOval(c: Color, x: int, y: int, width: int, height: int): void
+        -drawOval(Color c, int x, int y, int width, int height): void
 }
+
 Class PlanetPattern extends RoundObject{
 	+PlanetPattern (int width, int height)
 	+drawAt(locationX: int, locationY: int): void
-    -drawOval(c: Color, x: int, y: int, width: int, height: int): void
+        -drawOval(Color c, int x, int y, int width, int height): void
 }
 Class PlanetRing{
 	-int locationX
@@ -145,8 +161,8 @@ Class Star implements LocatedRectangle{
 	-int width
 	-int height
 	+Star(int locationX, int locationY, int width, int height)
-	-createStar(centerX: double, centerY: double, innerRadius: double, outerRadius: double, 
-				numRays: int, startAngleRad: double): Shape
+	-createStar(double centerX, double centerY, double innerRadius, 
+double outerRadius, int numRays, double startAngleRad): Shape
 	+address():Point 
 	+width():int
 	+height():int

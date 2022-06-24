@@ -28,10 +28,6 @@ public class Head {
 		this.headColor = newColor;
 	}
 	
-	public Color getHeadColor() {
-		return this.headColor;
-	}
-	
 	public void setHeadShape(int headShape) {
 		if (headShape == 1)
 			this.headShape = 2;
