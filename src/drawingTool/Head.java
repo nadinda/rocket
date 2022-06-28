@@ -13,6 +13,7 @@ public class Head {
 		this.width = width;
 		this.height = height;
 		this.headShape = RandomNumber.between(1, 2);
+		this.headColor = Color.gray;
 	}
 	
 	public void drawAt(Point point) {

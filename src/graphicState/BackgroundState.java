@@ -20,12 +20,21 @@ public class BackgroundState extends State {
 	@Override
 	public State setBgColor() {
 		context.changeBgColor();
-		return BackgroundState.getInstance(context);
+		return this;
 	}
 
 	@Override
 	public State setFireLevel() {
-	
 		return FireState.getInstance(context);
+	}
+
+	@Override
+	public State setRocket() {
+		return RocketState.getInstance(context);
+	}
+	
+	@Override
+	public State setScene() {
+		return SceneState.getInstance(context);
 	}
 }

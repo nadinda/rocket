@@ -8,7 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Buttons {
@@ -17,13 +19,20 @@ public class Buttons {
 	private JButton rocketsHeadColorButton = new JButton("Change Rocket Head Color");
 	private JButton rocketsHeadShapeButton = new JButton("Change Rocket Head Shape");
 	private JButton rocketsFireLevelButton = new JButton("Change Rocket Fire Level");
-
+	private JButton onlyRocketsButton = new JButton("Show Only Rockets");
+	private JButton showSceneButton = new JButton("Show Scene");
+	private JLabel planetSizeLabel = new JLabel("Change Planet Size");
+	private JSlider planetSizeSlider = new JSlider(-1, 1, 0);
+	
 	public void addActionListener(ActionListener listener) {
 		bgColorButton.addActionListener(listener);
 		planetsColorButton.addActionListener(listener);
 		rocketsHeadColorButton.addActionListener(listener);
 		rocketsHeadShapeButton.addActionListener(listener);
 	    rocketsFireLevelButton.addActionListener(listener);
+	    onlyRocketsButton.addActionListener(listener);
+	    showSceneButton.addActionListener(listener);
+	    planetSizeSlider.addChangeListener((ChangeListener) listener);
 	}
 
 	public void addButtonsToAPanel(JFrame frame) {
@@ -33,9 +42,13 @@ public class Buttons {
 
 		menu.add(bgColorButton);
 		menu.add(planetsColorButton);
+		menu.add(onlyRocketsButton);
+		menu.add(showSceneButton);
 		menu.add(rocketsHeadColorButton);
 		menu.add(rocketsHeadShapeButton);
 		menu.add(rocketsFireLevelButton);
+		menu.add(planetSizeLabel);
+		menu.add(planetSizeSlider);
 
 		menu.setBorder(BorderFactory.createRaisedBevelBorder());
 		frame.add(menu, BorderLayout.WEST);
@@ -47,6 +60,14 @@ public class Buttons {
 
 	public JButton getPlanetsColorButton() {
 		return planetsColorButton;
+	}
+	
+	public JButton getShowSceneButton() {
+		return showSceneButton;
+	}
+	
+	public JButton getOnlyRocketsButton() {
+		return onlyRocketsButton;
 	}
 
 	public JButton getRocketsHeadColorButton() {
@@ -60,4 +81,8 @@ public class Buttons {
 	public JButton getRocketsFireLevelButton() {
 		return rocketsFireLevelButton;
 	}
+	
+	public JSlider getPlanetSizeSlider() {
+		return planetSizeSlider;
+	} 
 }

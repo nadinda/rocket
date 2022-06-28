@@ -12,8 +12,8 @@ public class Rocket implements LocatedRectangle {
 	private int height;
 
 	public Rocket(int locationX, int locationY, int width, int height) {
-		body = new Body(width, height);
 		head = new Head(width, height);
+		body = new Body(width, height);
 		this.point = new Point(locationX, locationY);
 		this.width = width;
 		this.height = width;

@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import drawingTool.RandomNumber;
 import drawingTool.TestDrawingTool;
-import graphicState.FireState;
+import graphicState.SceneState;
 import graphicState.State;
 
 public class Scene  {
@@ -17,7 +17,7 @@ public class Scene  {
 	private Color bgColor;
 	
 	public Scene() {
-		graphicState = FireState.getInstance(this);
+		graphicState = SceneState.getInstance(this);
 		bgColor = Color.black;
 		
 		addRockets();
@@ -25,8 +25,36 @@ public class Scene  {
 		addStars();
 	}
 	
+	public void setFireLevel() {
+		graphicState = graphicState.setFireLevel();
+	}
+	
+	public void setBgColor() {
+		graphicState = graphicState.setBgColor();
+	}
+	
+	public void setRocket() {
+		graphicState = graphicState.setRocket();
+	}
+	
+	public void setScene() {
+		graphicState = graphicState.setScene();
+	}
+	
+	public void showOnlyRockets() {
+		objects.clear();
+		addRockets();
+	}
+	
+	public void showScene() {
+		objects.clear();
+		addRockets();
+		addPlanets();
+		addStars();
+	}
+	
 	public void changeBgColor() {
-		this.bgColor = new Color(232, RandomNumber.between(72, 232), 19);
+		this.bgColor = new Color(RandomNumber.between(3, 40), 3, RandomNumber.between(0, 40));
 	}
 	
 	public void changePlanetColor() {
@@ -34,6 +62,16 @@ public class Scene  {
 			if (anObj.getClass() == Planet.class) {
 				Color newColor = new Color(232, RandomNumber.between(72, 232), 19);
 				((Planet) anObj).setPlanetColor(newColor);
+			}
+		}
+	}
+	
+	public void changePlanetSize(int increment) {
+		for (LocatedRectangle anObj : objects) {
+			if (anObj.getClass() == Planet.class) {
+				int newWidth = anObj.width() + increment;
+				int neWHeight = anObj.height() + increment;
+				((Planet) anObj).setPlanetSize(newWidth, neWHeight);
 			}
 		}
 	}
@@ -130,11 +168,5 @@ public class Scene  {
 		}
 	}
 
-	public void setFireLevel() {
-		graphicState = graphicState.setFireLevel();
-	}
 	
-	public void setBgColor() {
-		graphicState = graphicState.setBgColor();
-	}
 }

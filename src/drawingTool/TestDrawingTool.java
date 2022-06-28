@@ -11,8 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class TestDrawingTool extends JFrame implements ActionListener {
+public class TestDrawingTool extends JFrame implements ActionListener, ChangeListener {
 	private DrawingArea drawing;
 	private Buttons buttons = new Buttons();
 
@@ -49,10 +51,15 @@ public class TestDrawingTool extends JFrame implements ActionListener {
 		if (e.getSource() == buttons.getBgColorButton()) {
 			tidyUpDrawingArea();
 			drawing.getScene().setBgColor();
-		}
-		else if (e.getSource() == buttons.getPlanetsColorButton()) {
+		} else if (e.getSource() == buttons.getPlanetsColorButton()) {
 			tidyUpDrawingArea();
 			drawing.getScene().changePlanetColor();
+		} else if (e.getSource() == buttons.getShowSceneButton()) {
+			tidyUpDrawingArea();
+			drawing.getScene().showScene();
+		} else if (e.getSource() == buttons.getOnlyRocketsButton()) {
+			tidyUpDrawingArea();
+			drawing.getScene().setRocket();
 		} else if (e.getSource() == buttons.getRocketsHeadColorButton()) {
 			tidyUpDrawingArea();
 			drawing.getScene().changeRocketHeadColor();
@@ -73,5 +80,14 @@ public class TestDrawingTool extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		new TestDrawingTool("Space Adventure");
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		if (e.getSource() == buttons.getPlanetSizeSlider()) {
+			int sliderValue = buttons.getPlanetSizeSlider().getValue();
+			tidyUpDrawingArea();
+			drawing.getScene().changePlanetSize(sliderValue);
+		}
 	}
 }
