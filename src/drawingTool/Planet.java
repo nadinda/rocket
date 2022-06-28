@@ -40,11 +40,6 @@ public class Planet implements LocatedRectangle {
 		Drawing.pen().fillOval(x, y, width, height);
 	}
 	
-	public void setPlanetSize(int newWidth, int newHeight) {
-		this.width = newWidth;
-		this.height = newHeight;
-	}
-	
 	public void setPlanetColor(Color newColor) {
 		this.planetColor = newColor;
 	}

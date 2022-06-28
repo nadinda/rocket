@@ -66,16 +66,6 @@ public class Scene  {
 		}
 	}
 	
-	public void changePlanetSize(int increment) {
-		for (LocatedRectangle anObj : objects) {
-			if (anObj.getClass() == Planet.class) {
-				int newWidth = anObj.width() + increment;
-				int neWHeight = anObj.height() + increment;
-				((Planet) anObj).setPlanetSize(newWidth, neWHeight);
-			}
-		}
-	}
-	
 	public void changeRocketHeadColor() {
 		for (LocatedRectangle anObj : objects) {
 			if (anObj.getClass() == Rocket.class) {
@@ -97,7 +87,7 @@ public class Scene  {
 	public void changeRocketFireLevel() {
 		for (LocatedRectangle anObj : objects) {
 			if (anObj.getClass() == Rocket.class) {
-				((Rocket) anObj).setFireLevel(RandomNumber.between(0,3));
+				((Rocket) anObj).setFireLevel(RandomNumber.between(1,3));
 			}
 		}
 	}
@@ -155,13 +145,11 @@ public class Scene  {
 	}
 	
 	public void drawBackground(Dimension dimension) {
-		//Drawing.pen().setColor(newColor);
 		Drawing.pen().setColor(this.bgColor);
 		Drawing.pen().fillRect(0, 0, dimension.width, dimension.height);
 	}
 	
 	public void draw(Dimension dimension) {
-		//drawBackground(dimension, newColor);
 		drawBackground(dimension);
 		for (LocatedRectangle eachObj : objects) {
 			eachObj.draw();

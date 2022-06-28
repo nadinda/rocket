@@ -18,11 +18,9 @@ public class Buttons {
 	private JButton planetsColorButton = new JButton("Change Planets Color");
 	private JButton rocketsHeadColorButton = new JButton("Change Rocket Head Color");
 	private JButton rocketsHeadShapeButton = new JButton("Change Rocket Head Shape");
-	private JButton rocketsFireLevelButton = new JButton("Change Rocket Fire Level");
+	private JButton rocketsFireLevelButton = new JButton("Fire Up Rocket");
 	private JButton onlyRocketsButton = new JButton("Show Only Rockets");
 	private JButton showSceneButton = new JButton("Show Scene");
-	private JLabel planetSizeLabel = new JLabel("Change Planet Size");
-	private JSlider planetSizeSlider = new JSlider(-1, 1, 0);
 	
 	public void addActionListener(ActionListener listener) {
 		bgColorButton.addActionListener(listener);
@@ -32,23 +30,20 @@ public class Buttons {
 	    rocketsFireLevelButton.addActionListener(listener);
 	    onlyRocketsButton.addActionListener(listener);
 	    showSceneButton.addActionListener(listener);
-	    planetSizeSlider.addChangeListener((ChangeListener) listener);
 	}
 
 	public void addButtonsToAPanel(JFrame frame) {
 		JPanel menu = new JPanel();
 		menu.setLayout(new GridLayout(12, 1, 15, 30));
-		menu.setBackground(new Color(90, 150, 110));
+		menu.setBackground(new Color(20, 3, 60));
 
 		menu.add(bgColorButton);
-		menu.add(planetsColorButton);
-		menu.add(onlyRocketsButton);
 		menu.add(showSceneButton);
-		menu.add(rocketsHeadColorButton);
-		menu.add(rocketsHeadShapeButton);
+		menu.add(onlyRocketsButton);
 		menu.add(rocketsFireLevelButton);
-		menu.add(planetSizeLabel);
-		menu.add(planetSizeSlider);
+		menu.add(rocketsHeadShapeButton);
+		menu.add(rocketsHeadColorButton);
+		menu.add(planetsColorButton);
 
 		menu.setBorder(BorderFactory.createRaisedBevelBorder());
 		frame.add(menu, BorderLayout.WEST);
@@ -81,8 +76,4 @@ public class Buttons {
 	public JButton getRocketsFireLevelButton() {
 		return rocketsFireLevelButton;
 	}
-	
-	public JSlider getPlanetSizeSlider() {
-		return planetSizeSlider;
-	} 
 }

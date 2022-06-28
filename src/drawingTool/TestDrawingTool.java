@@ -11,10 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-public class TestDrawingTool extends JFrame implements ActionListener, ChangeListener {
+public class TestDrawingTool extends JFrame implements ActionListener {
 	private DrawingArea drawing;
 	private Buttons buttons = new Buttons();
 
@@ -80,14 +78,5 @@ public class TestDrawingTool extends JFrame implements ActionListener, ChangeLis
 
 	public static void main(String[] args) {
 		new TestDrawingTool("Space Adventure");
-	}
-
-	@Override
-	public void stateChanged(ChangeEvent e) {
-		if (e.getSource() == buttons.getPlanetSizeSlider()) {
-			int sliderValue = buttons.getPlanetSizeSlider().getValue();
-			tidyUpDrawingArea();
-			drawing.getScene().changePlanetSize(sliderValue);
-		}
 	}
 }
