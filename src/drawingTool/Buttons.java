@@ -20,7 +20,7 @@ public class Buttons {
 	private JButton rocketsHeadShapeButton = new JButton("Change Rocket Head Shape");
 	private JButton rocketsFireLevelButton = new JButton("Fire Up Rocket");
 	private JButton onlyRocketsButton = new JButton("Show Only Rockets");
-	private JButton showSceneButton = new JButton("Show Scene");
+	private JButton showSceneButton = new JButton("Randomize Scene");
 	
 	public void addActionListener(ActionListener listener) {
 		bgColorButton.addActionListener(listener);
